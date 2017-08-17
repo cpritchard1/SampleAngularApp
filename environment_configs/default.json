@@ -1,0 +1,9 @@
+ {
+    "constants": {
+      "APP_CONFIGS": {
+        "name": "default",
+        "useMockData": false,
+        "webServiceBaseURL": "http://localhost.ejgallo.com:8087/"
+      }
+    }
+}
