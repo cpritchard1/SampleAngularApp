@@ -9,34 +9,8 @@ module.exports = function(grunt) {
         build: 'build',
         compile: 'bin',
         dist: 'dist',
-        vendor: 'vendor',
+        vendor: 'bower_components',
         grunt: 'grunt'
-    };
-
-    var appfiles = {
-        /**
-        * This is a collection of file patterns that refer to our app code (the
-        * stuff in `src/`). These file paths are used in the configuration of
-        * build tasks. `js` is all project javascript, less tests. `ctpl` contains
-        * our reusable components' (`src/common`) template HTML files, while
-        * `atpl` contains the same, but for our app's code. `html` is just our
-        * main HTML file, `less` is our main stylesheet, and `unit` contains our
-        * app's unit tests.
-        */
-        js: [dir.src + '/**/*.js', '!' + dir.src + '/**/*.spec.js', '!' + dir.src + '/assets/**/*.js'],
-        assets: [dir.src + '/assets/**/*'],
-        jsunit: [dir.src + '/**/*.spec.js'],
-
-        mockDataFiles: [dir.src + '/common/dataMocks/**/*.json'],
-
-        appTemplates: [dir.src + '/app/**/*.tpl.html'],
-        commonTemplates: [dir.src + '/common/**/*.tpl.html'],
-
-        html: [dir.src + '/index.html'],
-        less: dir.src + '/less/main.less',
-        lessFiles: dir.src + '**/*.less',
-
-        toBeCopied: [dir.src + '/common/layouts/**/*.html', dir.src + '/app/**/*.html', '!' + dir.src + '/app/**/*.tpl.html']
     };
 
     grunt.initConfig({
@@ -78,7 +52,7 @@ module.exports = function(grunt) {
         copy: {
             buildAppJs: {
                 files: [
-                    { cwd: '.', src: ['src/**/*.js', 'src/**/*.html'] ,  dest: 'build/' }
+                    { cwd: '.', src: ['src/**/*.js', 'src/**/*.html'],  dest: 'build/' }
                 ]
             },
             buildAppAssets: {
@@ -94,6 +68,19 @@ module.exports = function(grunt) {
             buildAppLess: {
                 files: [
                     { cwd: '.', src: 'src/less/**/*', dest: 'build/'}
+                ]
+            },
+            buildVendorFiles: {
+                files: [
+                    { cwd: '.',
+                      src: [
+                          dir.vendor + '/angular/angular.js',
+                          dir.vendor + '/angular-ui-router/release/angular-ui-router.js',
+                          dir.vendor + '/jquery/dist/jquery.js',
+                          dir.vendor + '/bootstrap/dist/css/bootstrap.css'
+                      ],
+                      dest: 'build/'
+                    }
                 ]
             }
         },
